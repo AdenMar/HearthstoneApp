@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical"
+    android:background="@drawable/bluecardback"
+    android:paddingBottom="20dp"
     >
 
     <include
@@ -14,33 +16,40 @@
         />
 
     <TextView
-        android:layout_width="224dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="HEARTHSEARCH"
-        android:textSize="30dp"/>
+        android:shadowColor="@color/black"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="1"
+        android:textSize="50dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
     <TextView
+        android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="DECKS"
+        android:textStyle="bold"
+        android:shadowColor="@color/black"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="1"
         android:layout_gravity="center"
-        android:textSize="30dp"
-        android:paddingBottom="20dp"/>
+        android:textSize="50dp"
+        android:paddingBottom="20dp"
+        android:textColor="@color/white"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:src="@drawable/hearthstonelogo1"
-        android:layout_gravity="center"
-        android:padding="20dp"/>
 
     <Button
         android:id="@+id/aboutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ABOUT"
         android:layout_gravity="center"
-        android:onClick="onAboutClick" />
+        android:onClick="onAboutClick"
+        android:text="ABOUT" />
 
     <Button
         android:id="@+id/startButton"

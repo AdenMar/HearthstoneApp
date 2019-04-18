@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -30,6 +32,9 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         displayInfo = findViewById(R.id.displayInfo);
 
         Intent intent = getIntent();
@@ -42,9 +47,13 @@ public class ResultActivity extends AppCompatActivity {
         new NetworkCall().execute(url);
 
     }
-        //url = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/search/{name}" + searchEditText.getText();
-       // new ResultActivity.NetworkCall().execute(url);
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     public class NetworkCall extends AsyncTask<String, Void, String> {
 
