@@ -41,7 +41,7 @@ public class ResultActivity extends AppCompatActivity {
 
         return view;
     }
-    private class NetworkCall extends AsyncTask<String, Void, String> {
+    public class NetworkCall extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... strings) {
