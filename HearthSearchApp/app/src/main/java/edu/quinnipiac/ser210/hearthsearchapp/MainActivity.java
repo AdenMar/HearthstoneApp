@@ -1,5 +1,6 @@
 package edu.quinnipiac.ser210.hearthsearchapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -19,10 +20,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void onAboutClick(View view) {
 
+        Intent intent = new Intent(this, AboutActivity.class);
+        startActivity(intent);
     }
 
     public void onStartClick(View view) {
 
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
     }
 
     @Override
