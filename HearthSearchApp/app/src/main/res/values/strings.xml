@@ -1,0 +1,9 @@
+<resources>
+    <string name = "app_name">HearthSearch</string>
+    <string name ="search_name">Search</string>
+    <string name = "favorites_name">Favorites</string>
+    <string name = "about_name">About</string>
+    <string name = "result_name">Result</string>
+    <string name = "help_option">Help</string>
+
+</resources>
