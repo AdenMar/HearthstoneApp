@@ -18,8 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="HEARTHSEARCH"
-        android:textSize="30dp"
-        app:fontFamily="cursive" />
+        android:textSize="30dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -23,24 +23,29 @@ public class ResultActivity extends AppCompatActivity {
 
     TextView displayInfo;
     String url;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
+        displayInfo = findViewById(R.id.displayInfo);
+
         Intent intent = getIntent();
-    }
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.activity_result, container, false);
-        displayInfo = view.findViewById(R.id.displayInfo);
-        url = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/search/{name}";
+        name = intent.getStringExtra("name");
+
+        displayInfo.setText("you chose " + name);
+
+
+        url = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/" + name;
         new NetworkCall().execute(url);
 
-        return view;
     }
+        //url = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/search/{name}" + searchEditText.getText();
+       // new ResultActivity.NetworkCall().execute(url);
+
+
     public class NetworkCall extends AsyncTask<String, Void, String> {
 
         @Override
@@ -55,7 +60,7 @@ public class ResultActivity extends AppCompatActivity {
 
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
-                urlConnection.setRequestProperty("X-RapidAPI-Key","7c3263565dmsh976e81b3f1c9f2cp1dfd9ejsnc779f8ee1461");
+                urlConnection.setRequestProperty("X-RapidAPI-Key","8267e69849msh50454c6cb8b515dp149b89jsn935699dc0ac6");
 
                 urlConnection.connect();
 

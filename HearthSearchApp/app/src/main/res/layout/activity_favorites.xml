@@ -6,4 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".FavoritesActivity">
 
+    <include
+        layout="@layout/activity_toolbar"
+        android:id="@+id/toolbar"
+        />
+
 </android.support.constraint.ConstraintLayout>

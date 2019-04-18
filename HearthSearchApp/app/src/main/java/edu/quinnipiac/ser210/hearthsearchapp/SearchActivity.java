@@ -6,28 +6,60 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class SearchActivity extends AppCompatActivity {
 
-    String url;
-    EditText searchEditText;
-    Button searchEnterBtn;
+    RadioButton nameButton;
+    RadioButton typeButton;
+    RadioButton classButton;
+    RadioButton factionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        Intent intent = getIntent();
+
+        RadioGroup radioGroup = findViewById(R.id.radioGroup);
+        nameButton = findViewById(R.id.nameButton);
+        typeButton = findViewById(R.id.typeButton);
+        classButton = findViewById(R.id.classButton);
+        factionButton = findViewById(R.id.factionButton);
+
+
     }
 
     public void onSearchButtonClick(View view) {
         Intent intent = new Intent(this, ResultActivity.class);
-        startActivity(intent);
-        searchEnterBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                url = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/search/{name}" + searchEditText.getText();
-                new ResultActivity.NetworkCall().execute(url);
-            }
-        });
+        EditText messageView = (EditText)findViewById(R.id.searchEditText);
+
+       /* if(nameButton.isSelected())
+        {
+            String nameText = messageView.getText().toString();
+            intent.putExtra("name", nameText);
+        }
+        else if(typeButton.isSelected())
+        {
+            String typeText = messageView.getText().toString();
+            intent.putExtra("type", typeText);
+        }
+        else if(classButton.isSelected())
+        {
+            String classText = messageView.getText().toString();
+            intent.putExtra("class", classText);
+        }
+        else if(factionButton.isSelected())
+        {
+            String factionText = messageView.getText().toString();
+            intent.putExtra("faction", factionText);
+        }
+        */
+       String text = messageView.getText().toString();
+       intent.putExtra("name", text);
+       startActivity(intent);
+
+
     }
 }

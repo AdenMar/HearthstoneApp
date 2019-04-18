@@ -15,7 +15,7 @@ public class JSONDataHandler {
         type = cardData.getString("type");
         health = cardData.getString("health");
         text = cardData.getString("text");
-        playerClass = cardData.getString("PlayerClass");
+        playerClass = cardData.getString("playerClass");
         imgGold = cardData.getString("imgGold");
 
 
