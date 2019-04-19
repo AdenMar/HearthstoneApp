@@ -36,6 +36,8 @@ public class SearchActivity extends AppCompatActivity {
 
 
     }
+
+    //inflates the support action bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -43,6 +45,7 @@ public class SearchActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    //access the result screen by this button
     public void onSearchButtonClick(View view) {
         Intent intent = new Intent(this, ResultActivity.class);
         EditText messageView = (EditText)findViewById(R.id.searchEditText);

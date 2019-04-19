@@ -16,6 +16,7 @@ public class AboutActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
+    //inflates the support action bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {

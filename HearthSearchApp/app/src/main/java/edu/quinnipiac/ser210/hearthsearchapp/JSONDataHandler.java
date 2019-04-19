@@ -12,6 +12,7 @@ import java.net.URL;
 public class JSONDataHandler {
 
 
+    //gets the card data from the API
     public String getCardData(String JSONString) throws JSONException {
         String name,cardSet,type,health,text,playerClass,imgGold,attack;
 

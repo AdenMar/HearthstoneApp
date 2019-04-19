@@ -51,11 +51,9 @@ public class ResultActivity extends AppCompatActivity {
         url = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/search/" + name;
         new NetworkCall().execute(url);
 
-       // bitmap = getBitMapFromURL("http://media.services.zam.com/v1/media/byName/hs/cards/enus/GIL_694.png");
-       // cardImage.setImageBitmap(bitmap);
-
     }
 
+    //inflates the action bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -79,6 +77,8 @@ public class ResultActivity extends AppCompatActivity {
         }
     }
     */
+
+   //accesses the online API to get the hearthstone information
     public class NetworkCall extends AsyncTask<String, Void, String> {
 
         @Override
