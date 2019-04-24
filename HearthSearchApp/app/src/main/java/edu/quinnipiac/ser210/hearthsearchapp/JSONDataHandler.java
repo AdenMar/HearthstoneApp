@@ -1,5 +1,9 @@
 package edu.quinnipiac.ser210.hearthsearchapp;
 
+
+import android.util.JsonReader;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -7,26 +11,37 @@ public class JSONDataHandler {
 
 
     public String getCardData(String JSONString) throws JSONException {
-        String name,cardSet,type,health,text,playerClass,imgGold;
-        JSONObject cardData = new JSONObject(JSONString);
+        String name,cardSet,type,health,text,imgGold,playerClass,attack,cost;
 
-        name = cardData.getString("name");
-        cardSet = cardData.getString("cardSet");
-        type = cardData.getString("type");
-        health = cardData.getString("health");
-        text = cardData.getString("text");
-        playerClass = cardData.getString("playerClass");
-        imgGold = cardData.getString("imgGold");
+        JSONArray cardData = new JSONArray(JSONString);
+
+        JSONObject main = cardData.getJSONObject(0);
+
+        imgGold = main.getString("imgGold");
 
 
-        String toset = imgGold
-                + "\n"+ name
-                + "\n"+ playerClass
+
+        name = main.getString("name");
+        cardSet = main.getString("cardSet");
+        type = main.getString("type");
+        health = main.getString("health");
+        text = main.getString("text");
+        playerClass = main.getString("playerClass");
+        attack = main.getString("attack");
+        cost = main.getString("cost");
+
+
+        String toset =
+                  "Card Name: "+ name
+                + "\nPlayer Class: "+ playerClass
                 + "\nCard Set: " + cardSet
                 + "\nCard Type: " + type
-                + "\nHealth: " + health
-                + "\n"+ text;
+                + "\nCost: " + cost
+                + "\nAttack: " + attack
+                + "\nHealth: " + health;
+                //+ "\n"+ text;
         return toset;
 
     }
+
 }
