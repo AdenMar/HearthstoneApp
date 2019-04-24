@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,8 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,8 +33,7 @@ public class ResultActivity extends AppCompatActivity {
     TextView displayInfo;
     String url;
     String name;
-    ImageView cardImage;
-    Bitmap bitmap;
+    JSONDataHandler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +50,11 @@ public class ResultActivity extends AppCompatActivity {
 
         displayInfo.setText("you chose " + name);
 
-
-        url = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/search/" + name;
+        url = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/" + name;
         new NetworkCall().execute(url);
 
-       // bitmap = getBitMapFromURL("http://media.services.zam.com/v1/media/byName/hs/cards/enus/GIL_694.png");
-       // cardImage.setImageBitmap(bitmap);
-
+        new DownloadImageFromInternet((ImageView) findViewById(R.id.cardImage))
+                .execute(handler.getCardData("imgGold"));
     }
 
     @Override
@@ -63,22 +64,31 @@ public class ResultActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-   /* public Bitmap getBitMapFromURL(String src){
-        try {
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
+    public class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {
+        ImageView imageView;
 
-        } catch (Exception e){
-            e.printStackTrace();
-            return null;
+        public DownloadImageFromInternet(ImageView imageView) {
+            this.imageView = imageView;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String imageURL = urls[0];
+            Bitmap bimage = null;
+            try {
+                InputStream in = new java.net.URL(imageURL).openStream();
+                bimage = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error Message", e.getMessage());
+                e.printStackTrace();
+            }
+            return bimage;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            imageView.setImageBitmap(result);
         }
     }
-    */
+
     public class NetworkCall extends AsyncTask<String, Void, String> {
 
         @Override

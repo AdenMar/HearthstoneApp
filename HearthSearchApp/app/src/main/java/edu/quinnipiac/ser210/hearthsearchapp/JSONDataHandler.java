@@ -1,25 +1,26 @@
 package edu.quinnipiac.ser210.hearthsearchapp;
 
-import android.graphics.Bitmap;
+
+import android.util.JsonReader;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 public class JSONDataHandler {
 
 
     public String getCardData(String JSONString) throws JSONException {
-        String name,cardSet,type,health,text,playerClass,imgGold,attack;
+        String name,cardSet,type,health,text,imgGold,playerClass,attack,cost;
 
         JSONArray cardData = new JSONArray(JSONString);
 
         JSONObject main = cardData.getJSONObject(0);
 
-        //imgGold = main.getString("imgGold");
+        imgGold = main.getString("imgGold");
+
+
+
         name = main.getString("name");
         cardSet = main.getString("cardSet");
         type = main.getString("type");
@@ -27,19 +28,20 @@ public class JSONDataHandler {
         text = main.getString("text");
         playerClass = main.getString("playerClass");
         attack = main.getString("attack");
+        cost = main.getString("cost");
 
 
-        String toset = //imgGold
-                  "\nCard Name: "+ name
+        String toset =
+                  "Card Name: "+ name
                 + "\nPlayer Class: "+ playerClass
                 + "\nCard Set: " + cardSet
                 + "\nCard Type: " + type
+                + "\nCost: " + cost
                 + "\nAttack: " + attack
                 + "\nHealth: " + health;
                 //+ "\n"+ text;
         return toset;
 
     }
-
 
 }
