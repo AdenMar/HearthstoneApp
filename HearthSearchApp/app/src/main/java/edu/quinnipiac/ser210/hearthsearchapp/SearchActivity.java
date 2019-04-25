@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -47,27 +48,28 @@ public class SearchActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ResultActivity.class);
         EditText messageView = (EditText)findViewById(R.id.searchEditText);
 
-       /* if(nameButton.isSelected())
+       if(nameButton.isChecked())
         {
-            String nameText = messageView.getText().toString();
-            intent.putExtra("name", nameText);
+            //default
+            String nameText = "";
+            intent.putExtra("type", nameText);
         }
-        else if(typeButton.isSelected())
+        else if(typeButton.isChecked())
         {
-            String typeText = messageView.getText().toString();
+            Log.d("Search error", "you chose type");
+            String typeText = "types/";
             intent.putExtra("type", typeText);
         }
-        else if(classButton.isSelected())
+        else if(classButton.isChecked())
         {
-            String classText = messageView.getText().toString();
-            intent.putExtra("class", classText);
+            String classText = "classes/";
+            intent.putExtra("type", classText);
         }
-        else if(factionButton.isSelected())
+        else if(factionButton.isChecked())
         {
-            String factionText = messageView.getText().toString();
-            intent.putExtra("faction", factionText);
+            String factionText = "factions/";
+            intent.putExtra("type", factionText);
         }
-        */
        String text = messageView.getText().toString();
        intent.putExtra("name", text);
        startActivity(intent);

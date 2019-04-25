@@ -33,6 +33,7 @@ public class ResultActivity extends AppCompatActivity {
     TextView displayInfo;
     String url;
     String name;
+    String urlSpec;
     JSONDataHandler handler;
 
     @Override
@@ -47,14 +48,18 @@ public class ResultActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
+        urlSpec = intent.getStringExtra("type");
+
 
         displayInfo.setText("you chose " + name);
 
-        url = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/" + name;
+            url = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/" + urlSpec + name;
+
+
         new NetworkCall().execute(url);
 
-        new DownloadImageFromInternet((ImageView) findViewById(R.id.cardImage))
-                .execute(handler.getCardData("imgGold"));
+        //new DownloadImageFromInternet((ImageView) findViewById(R.id.cardImage))
+         //       .execute(handler.imgGold);
     }
 
     @Override
