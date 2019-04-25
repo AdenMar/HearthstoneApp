@@ -11,9 +11,11 @@ import android.util.JsonReader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,7 +68,30 @@ public class ResultActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.action_deck).setVisible(false);
         return super.onCreateOptionsMenu(menu);
+
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId()) {
+            case R.id.action_help:
+                Intent intent = new Intent(this, AboutActivity.class);
+                return true;
+
+            case R.id.action_favorite:
+                Toast.makeText(this, "You favorited this card!", Toast.LENGTH_LONG).show();
+                return true;
+
+            case R.id.action_deck:
+                Toast.makeText(this, "Added card to deck!", Toast.LENGTH_LONG).show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {

@@ -15,7 +15,13 @@
         android:orderInCategory="2"
         app:showAsAction="ifRoom"
         android:icon="@drawable/baseline_favorite_border_white_18dp"
-
+        />
+    <item
+        android:id="@+id/action_deck"
+        android:title="Deck"
+        android:orderInCategory="3"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/baseline_create_white_18dp"
         />
 
 
