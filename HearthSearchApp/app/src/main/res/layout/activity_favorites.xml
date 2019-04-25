@@ -1,21 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FavoritesActivity"
-    android:orientation="vertical">
+    tools:context=".FavoritesActivity">
 
-    <include
-        layout="@layout/activity_toolbar"
-        android:id="@+id/toolbar" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Coming Soon"
-        android:textSize="50dp"
-        android:layout_gravity="center"/>
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/activity_toolbar" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/favoritesView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="Favorites"
+            android:textSize="30dp"
+            android:layout_gravity="center"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="center">
+
+            <RadioButton
+                android:id="@+id/favOne"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Open Slot" />
+
+            <RadioButton
+                android:id="@+id/favTwo"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Open Slot" />
+
+            <RadioButton
+                android:id="@+id/favThree"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Open Slot" />
+
+            <RadioButton
+                android:id="@+id/favFour"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Open Slot" />
+
+            <RadioButton
+                android:id="@+id/favFive"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Open Slot" />
+
+            <RadioButton
+                android:id="@+id/favSix"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Open Slot" />
+
+            <RadioButton
+                android:id="@+id/favSeven"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Open Slot" />
+
+            <RadioButton
+                android:id="@+id/favEight"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Open Slot" />
+
+            <RadioButton
+                android:id="@+id/favNine"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Open Slot" />
+
+            <RadioButton
+                android:id="@+id/favTen"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Open Slot" />
+
+            <RadioButton
+                android:id="@+id/favEleven"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Open Slot" />
+
+            <RadioButton
+                android:id="@+id/favTwelve"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Open Slot" />
+
+        </RadioGroup>
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center">
+
+
+            <Button
+                android:id="@+id/searchEnterBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:onClick="onSearchButtonClick"
+                android:text="Search" />
+
+            <Button
+                android:id="@+id/RemoveBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:onClick="onRemoveButtonClick"
+                android:text="Remove" />
+
+        </GridLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

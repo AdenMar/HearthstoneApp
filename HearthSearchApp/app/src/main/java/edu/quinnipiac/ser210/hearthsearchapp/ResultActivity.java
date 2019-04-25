@@ -52,7 +52,6 @@ public class ResultActivity extends AppCompatActivity {
         name = intent.getStringExtra("name");
         urlSpec = intent.getStringExtra("type");
 
-
         displayInfo.setText("you chose " + name);
 
             url = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/" + urlSpec + name;
@@ -70,9 +69,8 @@ public class ResultActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         menu.findItem(R.id.action_deck).setVisible(false);
         return super.onCreateOptionsMenu(menu);
-
-
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
@@ -82,7 +80,13 @@ public class ResultActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_favorite:
-                Toast.makeText(this, "You favorited this card!", Toast.LENGTH_LONG).show();
+                Intent intentfavorite = new Intent(this, FavoritesActivity.class);
+                String displayText = displayInfo.getText().toString();
+                displayText = displayText.split("\n")[0];
+                String isolatedName = displayText.replace("Card Name: ","");
+                Toast.makeText(this, "You favorited " + isolatedName + "!", Toast.LENGTH_LONG).show();
+                intentfavorite.putExtra("name", isolatedName);
+                startActivity(intentfavorite);
                 return true;
 
             case R.id.action_deck:
