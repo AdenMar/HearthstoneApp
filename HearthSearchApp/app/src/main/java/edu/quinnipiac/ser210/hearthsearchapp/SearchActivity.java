@@ -1,3 +1,8 @@
+/*
+    Authors: Jillian Biasotti, Joe Ruiz, Aden Mariyappa
+    Date: April 25 2019
+    HearthSearch Application
+ */
 package edu.quinnipiac.ser210.hearthsearchapp;
 
 import android.content.Intent;
@@ -38,7 +43,8 @@ public class SearchActivity extends AppCompatActivity {
         factionButton = findViewById(R.id.factionButton);
 
     }
-
+	
+    //inflates the action bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -47,6 +53,7 @@ public class SearchActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    //adds functions to the action bar
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
@@ -68,6 +75,7 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+    //functions for the search button
     public void onSearchButtonClick(View view) {
         Intent intent = new Intent(this, ResultActivity.class);
         EditText messageView = (EditText)findViewById(R.id.searchEditText);
@@ -80,7 +88,6 @@ public class SearchActivity extends AppCompatActivity {
         }
         else if(typeButton.isChecked())
         {
-            Log.d("Search error", "you chose type");
             String typeText = "types/";
             intent.putExtra("type", typeText);
         }
