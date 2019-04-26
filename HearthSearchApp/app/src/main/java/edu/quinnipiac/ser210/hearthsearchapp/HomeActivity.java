@@ -1,3 +1,8 @@
+/*
+    Authors: Jillian Biasotti, Joe Ruiz, Aden Mariyappa
+    Date: April 25 2019
+    HearthSearch Application
+ */
 package edu.quinnipiac.ser210.hearthsearchapp;
 
 import android.content.Intent;
@@ -22,6 +27,7 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = getIntent();
     }
 
+    //inflates action bar menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -31,6 +37,7 @@ public class HomeActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
 
     }
+    //adds functions to the action bar
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
@@ -51,11 +58,14 @@ public class HomeActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    //functions for search button
     public void onSearchClick(View view) {
         Intent intent = new Intent(this, SearchActivity.class);
         startActivity(intent);
     }
 
+    //functions for favorites button
     public void onFavoritesClick(View view) {
         Intent intent = new Intent(this, FavoritesActivity.class);
         startActivity(intent);

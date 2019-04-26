@@ -1,3 +1,8 @@
+/*
+    Authors: Jillian Biasotti, Joe Ruiz, Aden Mariyappa
+    Date: April 25 2019
+    HearthSearch Application
+ */
 package edu.quinnipiac.ser210.hearthsearchapp;
 
 
@@ -6,6 +11,7 @@ import android.util.JsonReader;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+//gathers all the data from the API
 
 public class JSONDataHandler {
 

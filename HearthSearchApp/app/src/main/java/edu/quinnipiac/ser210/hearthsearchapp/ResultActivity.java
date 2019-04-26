@@ -1,3 +1,8 @@
+/*
+    Authors: Jillian Biasotti, Joe Ruiz, Aden Mariyappa
+    Date: April 25 2019
+    HearthSearch Application
+ */
 package edu.quinnipiac.ser210.hearthsearchapp;
 
 import android.content.Intent;
@@ -63,6 +68,7 @@ public class ResultActivity extends AppCompatActivity {
          //       .execute(handler.imgGold);
     }
 
+    //inflates the action bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -71,6 +77,7 @@ public class ResultActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    //adds functions for the action bar
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
