@@ -5,8 +5,6 @@
  */
 package edu.quinnipiac.ser210.hearthsearchapp;
 
-package edu.quinnipiac.ser210.hearthsearchapp;
-
 import android.util.JsonReader;
 
 import org.json.JSONArray;
