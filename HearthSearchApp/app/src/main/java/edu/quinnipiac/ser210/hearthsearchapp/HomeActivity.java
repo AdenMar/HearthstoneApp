@@ -31,6 +31,7 @@ public class HomeActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
@@ -51,6 +52,7 @@ public class HomeActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
     public void onSearchClick(View view) {
         Intent intent = new Intent(this, SearchActivity.class);
         startActivity(intent);

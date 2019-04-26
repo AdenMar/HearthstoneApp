@@ -1,5 +1,10 @@
-package edu.quinnipiac.ser210.hearthsearchapp;
+/*
+    Authors: Jillian Biasotti, Joe Ruiz, Aden Mariyappa
+    Date: April 25 2019
+    HearthSearch Application
+ */
 
+package edu.quinnipiac.ser210.hearthsearchapp;
 
 import android.util.JsonReader;
 

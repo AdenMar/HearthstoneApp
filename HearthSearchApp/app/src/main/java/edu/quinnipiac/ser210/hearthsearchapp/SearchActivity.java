@@ -37,8 +37,8 @@ public class SearchActivity extends AppCompatActivity {
         classButton = findViewById(R.id.classButton);
         factionButton = findViewById(R.id.factionButton);
 
-
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -46,6 +46,7 @@ public class SearchActivity extends AppCompatActivity {
         menu.findItem(R.id.action_favorite).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {

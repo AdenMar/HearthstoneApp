@@ -6,5 +6,10 @@
     <string name="result_name">Result</string>
     <string name="help_option">Help</string>
     <string name="about_text">This application was created by Jillian Biasotti, Aden Mariyappa, and Joe Ruiz. This was designed to help Hearthstone players to better their skills and knowledge of the cards. We aim to provide a useful resource to the users. The API used was provided by Rapid API.</string>
+    <string name="FavoritesTitle">Favorites</string>
+    <string name="open_slot">*****</string>
+    <string name="search">Search</string>
+    <string name="remove">Remove</string>
+    <string name="switchguide">Switch on - Search Mode / Switch off - Removal Mode</string>
 
 </resources>

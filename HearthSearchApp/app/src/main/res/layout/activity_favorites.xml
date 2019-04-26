@@ -19,149 +19,131 @@
             android:id="@+id/favoritesView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="0dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:text="Favorites"
-            android:textSize="30dp"
-            android:layout_gravity="center"/>
+            android:text="@string/FavoritesTitle"
+            android:textSize="30sp" />
 
-        <RadioGroup
-            android:id="@+id/radioGroup"
+        <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:textSize="15sp"
+            android:text="@string/switchguide" />
 
-            <RadioButton
-                android:id="@+id/favOne"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Open Slot" />
-
-            <RadioButton
-                android:id="@+id/favTwo"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Open Slot" />
-
-            <RadioButton
-                android:id="@+id/favThree"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Open Slot" />
-
-            <RadioButton
-                android:id="@+id/favFour"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Open Slot" />
-
-            <RadioButton
-                android:id="@+id/favFive"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Open Slot" />
-
-            <RadioButton
-                android:id="@+id/favSix"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Open Slot" />
-
-            <RadioButton
-                android:id="@+id/favSeven"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Open Slot" />
-
-            <RadioButton
-                android:id="@+id/favEight"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Open Slot" />
-
-            <RadioButton
-                android:id="@+id/favNine"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Open Slot" />
-
-            <RadioButton
-                android:id="@+id/favTen"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Open Slot" />
-
-            <RadioButton
-                android:id="@+id/favEleven"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Open Slot" />
-
-            <RadioButton
-                android:id="@+id/favTwelve"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Open Slot" />
-
-        </RadioGroup>
-
-        <GridLayout
+        <Switch
+            android:id="@+id/editSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:textAlignment="center" />
 
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+            <Button
+                android:id="@+id/slotOne"
+                android:onClick="cardClick"
+                android:layout_marginTop="10dp"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/open_slot" />
 
             <Button
-                android:id="@+id/searchEnterBtn"
-                android:layout_width="wrap_content"
+                android:id="@+id/slotTwo"
+                android:onClick="cardClick"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
-                android:onClick="onSearchButtonClick"
-                android:text="Search" />
+                android:layout_gravity="center"
+                android:text="@string/open_slot" />
 
             <Button
-                android:id="@+id/RemoveBtn"
-                android:layout_width="wrap_content"
+                android:id="@+id/slotThree"
+                android:onClick="cardClick"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
-                android:onClick="onRemoveButtonClick"
-                android:text="Remove" />
+                android:layout_gravity="center"
+                android:text="@string/open_slot" />
+            <Button
+                android:id="@+id/slotFour"
+                android:onClick="cardClick"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/open_slot" />
+            <Button
+                android:id="@+id/slotFive"
+                android:onClick="cardClick"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/open_slot" />
+            <Button
+                android:id="@+id/slotSix"
+                android:onClick="cardClick"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/open_slot" />
+            <Button
+                android:id="@+id/slotSeven"
+                android:onClick="cardClick"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/open_slot" />
+            <Button
+                android:id="@+id/slotEight"
+                android:onClick="cardClick"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/open_slot" />
+            <Button
+                android:id="@+id/slotNine"
+                android:onClick="cardClick"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/open_slot" />
+            <Button
+                android:id="@+id/slotTen"
+                android:onClick="cardClick"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/open_slot" />
+            <Button
+                android:id="@+id/slotEleven"
+                android:onClick="cardClick"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/open_slot" />
+            <Button
+                android:id="@+id/slotTwelve"
+                android:onClick="cardClick"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/open_slot" />
 
-        </GridLayout>
+            </LinearLayout>
+
+        </ScrollView>
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

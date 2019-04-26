@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         menu.findItem(R.id.action_favorite).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {

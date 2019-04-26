@@ -9,36 +9,35 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RadioButton;
+import android.widget.Button;
+import android.widget.Switch;
 import android.widget.Toast;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.android.gms.tasks.*;
-import com.google.firebase.firestore.SetOptions;
-import com.google.firebase.firestore.Source;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class FavoritesActivity extends AppCompatActivity {
 
-    RadioButton one;
-    RadioButton two;
-    RadioButton three;
-    RadioButton four;
-    RadioButton five;
-    RadioButton six;
-    RadioButton seven;
-    RadioButton eight;
-    RadioButton nine;
-    RadioButton ten;
-    RadioButton eleven;
-    RadioButton twelve;
+    Button slotOne;
+    Button slotTwo;
+    Button slotThree;
+    Button slotFour;
+    Button slotFive;
+    Button slotSix;
+    Button slotSeven;
+    Button slotEight;
+    Button slotNine;
+    Button slotTen;
+    Button slotEleven;
+    Button slotTwelve;
+    Switch slotEdit;
     String text;
-    String TempDeck[];
 
+    // creates an instance of our FireBase FireStore database
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -52,36 +51,27 @@ public class FavoritesActivity extends AppCompatActivity {
         Intent intent = getIntent();
         text = intent.getStringExtra("name");
 
-        one = (RadioButton) findViewById(R.id.favOne);
-        two = (RadioButton) findViewById(R.id.favTwo);
-        three = (RadioButton) findViewById(R.id.favThree);
-        four = (RadioButton) findViewById(R.id.favFour);
-        five = (RadioButton) findViewById(R.id.favFive);
-        six = (RadioButton) findViewById(R.id.favSix);
-        seven = (RadioButton) findViewById(R.id.favSeven);
-        eight = (RadioButton) findViewById(R.id.favEight);
-        nine = (RadioButton) findViewById(R.id.favNine);
-        ten = (RadioButton) findViewById(R.id.favTen);
-        eleven = (RadioButton) findViewById(R.id.favEleven);
-        twelve = (RadioButton) findViewById(R.id.favTwelve);
+        slotOne = (Button) findViewById(R.id.slotOne);
+        slotTwo = (Button) findViewById(R.id.slotTwo);
+        slotThree = (Button) findViewById(R.id.slotThree);
+        slotFour = (Button) findViewById(R.id.slotFour);
+        slotFive = (Button) findViewById(R.id.slotFive);
+        slotSix = (Button) findViewById(R.id.slotSix);
+        slotSeven = (Button) findViewById(R.id.slotSeven);
+        slotEight = (Button) findViewById(R.id.slotEight);
+        slotNine = (Button) findViewById(R.id.slotNine);
+        slotTen = (Button) findViewById(R.id.slotTen);
+        slotEleven = (Button) findViewById(R.id.slotEleven);
+        slotTwelve = (Button) findViewById(R.id.slotTwelve);
+        slotEdit = (Switch) findViewById(R.id.editSwitch);
 
-        loadFavorites("slot01", one);
-        loadFavorites("slot02", two);
-        loadFavorites("slot03", three);
-        loadFavorites("slot04", four);
-        loadFavorites("slot05", five);
-        loadFavorites("slot06", six);
-        loadFavorites("slot07", seven);
-        loadFavorites("slot08", eight);
-        loadFavorites("slot09", nine);
-        loadFavorites("slot10", ten);
-        loadFavorites("slot11", eleven);
-        loadFavorites("slot12", twelve);
-
-        //updateFavorite();
+        // updates and fills the buttons with the favorited cards
+        updateFavorite();
+        loadAllFavorites();
 
     }
 
+    // inflates action bar men
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -89,6 +79,7 @@ public class FavoritesActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    // adds functions to the action bar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -109,44 +100,117 @@ public class FavoritesActivity extends AppCompatActivity {
         }
     }
 
-    public void onSearchButtonClick(View view) {
-        Intent intent = new Intent(this, ResultActivity.class);
-        if (one.isChecked()) {
-            intent.putExtra("name", one.getText().toString());
-        } else if (two.isChecked()) {
-            intent.putExtra("name", two.getText().toString());
-        } else if (three.isChecked()) {
-            intent.putExtra("name", three.getText().toString());
-        } else if (four.isChecked()) {
-            intent.putExtra("name", four.getText().toString());
-        } else if (five.isChecked()) {
-            intent.putExtra("name", five.getText().toString());
-        } else if (six.isChecked()) {
-            intent.putExtra("name", six.getText().toString());
-        } else if (seven.isChecked()) {
-            intent.putExtra("name", seven.getText().toString());
-        } else if (eight.isChecked()) {
-            intent.putExtra("name", eight.getText().toString());
-        } else if (nine.isChecked()) {
-            intent.putExtra("name", nine.getText().toString());
-        } else if (ten.isChecked()) {
-            intent.putExtra("name", ten.getText().toString());
-        } else if (eleven.isChecked()) {
-            intent.putExtra("name", eleven.getText().toString());
-        } else if (twelve.isChecked()) {
-            intent.putExtra("name", twelve.getText().toString());
+    // when a card (button) is pressed, either search it or remove it base on the switch position
+    public void cardClick(View view){
+
+        if (slotEdit.isChecked() == false) {
+
+            Intent intent = new Intent(this, ResultActivity.class);
+            if (view.getId() == slotOne.getId()) {
+                intent.putExtra("name", slotOne.getText().toString());
+            } else if (view.getId() == slotTwo.getId()) {
+                intent.putExtra("name", slotTwo.getText().toString());
+            } else if (view.getId() == slotThree.getId()) {
+                intent.putExtra("name", slotThree.getText().toString());
+            } else if (view.getId() == slotFour.getId()) {
+                intent.putExtra("name", slotFour.getText().toString());
+            } else if (view.getId() == slotFive.getId()) {
+                intent.putExtra("name", slotFive.getText().toString());
+            } else if (view.getId() == slotSix.getId()) {
+                intent.putExtra("name", slotSix.getText().toString());
+            } else if (view.getId() == slotSeven.getId()) {
+                intent.putExtra("name", slotSeven.getText().toString());
+            } else if (view.getId() == slotEight.getId()) {
+                intent.putExtra("name", slotEight.getText().toString());
+            } else if (view.getId() == slotNine.getId()) {
+                intent.putExtra("name", slotNine.getText().toString());
+            } else if (view.getId() == slotTen.getId()) {
+                intent.putExtra("name", slotTen.getText().toString());
+            } else if (view.getId() == slotEleven.getId()) {
+                intent.putExtra("name", slotEleven.getText().toString());
+            } else if (view.getId() == slotTwelve.getId()) {
+                intent.putExtra("name", slotTwelve.getText().toString());
+            }
+
+            String nameText = "";
+            intent.putExtra("type", nameText);
+            startActivity(intent);
+
+        } else {
+
+            if (view.getId() == slotOne.getId()) {
+                removeCard("slot01");
+            } else if (view.getId() == slotTwo.getId()) {
+                removeCard("slot02");
+            } else if (view.getId() == slotThree.getId()) {
+                removeCard("slot03");
+            } else if (view.getId() == slotFour.getId()) {
+                removeCard("slot04");
+            } else if (view.getId() == slotFive.getId()) {
+                removeCard("slot05");
+            } else if (view.getId() == slotSix.getId()) {
+                removeCard("slot06");
+            } else if (view.getId() == slotSeven.getId()) {
+                removeCard("slot07");
+            } else if (view.getId() == slotEight.getId()) {
+                removeCard("slot08");
+            } else if (view.getId() == slotNine.getId()) {
+                removeCard("slot09");
+            } else if (view.getId() == slotTen.getId()) {
+                removeCard("slot10");
+            } else if (view.getId() == slotEleven.getId()) {
+                removeCard("slot11");
+            } else if (view.getId() == slotTwelve.getId()) {
+                removeCard("slot12");
+            }
         }
 
-        String nameText = "";
-        intent.putExtra("type", nameText);
-        startActivity(intent);
     }
 
-    public void onRemoveButtonClick(View view) {
-
+    // sets both document fields to base on param,
+    // passed through to proper function
+    public void removeCard(String slot){
+        updateCard("", false, slot);
     }
 
-    public void loadFavorites(String fav, final RadioButton num) {
+    // cycles through each document, checking occupation status, if space is occupied, continue,
+    // if not, assign card name to card and update occupation status
+    public void updateFavorite() {
+        if (text == null) {} else {
+
+            db.collection("favorites")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Log.d("FB", document.getId() + " => " + document.getData());
+                                    if (document.getData().get("isOccupied").equals(false)){
+                                        updateCard(text, true, document.getId());
+                                        break;
+                                    }
+                                }
+                            } else {
+                                Log.d("FB", "Error getting documents: ", task.getException());
+                            }
+                        }
+                    });
+        }
+    }
+
+    // the proper function designed to update a given cards fields base on params
+    public void updateCard(String card,Boolean isOccupied, String slot){
+        db.collection("favorites").document(slot)
+                .update(
+                        "card", card,
+                        "isOccupied", isOccupied
+                );
+        loadAllFavorites();
+    }
+
+    // applies proper card information based on params
+    public void loadFavorites(String fav, final Button num) {
         DocumentReference docRef = db.collection("favorites").document(fav);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -166,48 +230,22 @@ public class FavoritesActivity extends AppCompatActivity {
         });
     }
 
-    public void updateFavorite(String slot) {
-        Map<String, Object> decks = new HashMap<>();
-
-        DocumentReference docRef = db.collection("favorites").document(slot);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d("FB", "DocumentSnapshot data: " + document.getData());
-                        if (document.getData().get("isOccupied").equals(false)){
-
-                        }
-                    } else {
-                        Log.d("FB", "No such document");
-                    }
-                } else {
-                    Log.d("FB", "get failed with ", task.getException());
-                }
-            }
-        });
-
-
-
-
-
-        db.collection("favorites").document("slot")
-                .update(decks)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("FB", "DocumentSnapshot successfully written!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("FB", "Error writing document", e);
-                    }
-                });
+    // utilizes previous function to apply all cards
+    public void loadAllFavorites() {
+        loadFavorites("slot01", slotOne);
+        loadFavorites("slot02", slotTwo);
+        loadFavorites("slot03", slotThree);
+        loadFavorites("slot04", slotFour);
+        loadFavorites("slot05", slotFive);
+        loadFavorites("slot06", slotSix);
+        loadFavorites("slot07", slotSeven);
+        loadFavorites("slot08", slotEight);
+        loadFavorites("slot09", slotNine);
+        loadFavorites("slot10", slotTen);
+        loadFavorites("slot11", slotEleven);
+        loadFavorites("slot12", slotTwelve);
     }
+
 
 
 }
