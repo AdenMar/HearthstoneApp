@@ -4,15 +4,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -43,56 +40,34 @@ public class SearchActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        menu.findItem(R.id.action_favorite).setVisible(false);
         return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId()) {
-            case R.id.action_help:
-                Intent intent = new Intent(this, AboutActivity.class);
-                return true;
-
-            case R.id.action_favorite:
-                Toast.makeText(this, "You favorited this card!", Toast.LENGTH_LONG).show();
-                return true;
-
-            case R.id.action_deck:
-                Toast.makeText(this, "Added card to deck!", Toast.LENGTH_LONG).show();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     public void onSearchButtonClick(View view) {
         Intent intent = new Intent(this, ResultActivity.class);
         EditText messageView = (EditText)findViewById(R.id.searchEditText);
 
-       if(nameButton.isChecked())
+       /* if(nameButton.isSelected())
         {
-            //default
-            String nameText = "";
-            intent.putExtra("type", nameText);
+            String nameText = messageView.getText().toString();
+            intent.putExtra("name", nameText);
         }
-        else if(typeButton.isChecked())
+        else if(typeButton.isSelected())
         {
-            Log.d("Search error", "you chose type");
-            String typeText = "types/";
+            String typeText = messageView.getText().toString();
             intent.putExtra("type", typeText);
         }
-        else if(classButton.isChecked())
+        else if(classButton.isSelected())
         {
-            String classText = "classes/";
-            intent.putExtra("type", classText);
+            String classText = messageView.getText().toString();
+            intent.putExtra("class", classText);
         }
-        else if(factionButton.isChecked())
+        else if(factionButton.isSelected())
         {
-            String factionText = "factions/";
-            intent.putExtra("type", factionText);
+            String factionText = messageView.getText().toString();
+            intent.putExtra("faction", factionText);
         }
+        */
        String text = messageView.getText().toString();
        intent.putExtra("name", text);
        startActivity(intent);

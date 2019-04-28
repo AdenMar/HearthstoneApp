@@ -9,11 +9,9 @@ import org.json.JSONObject;
 
 public class JSONDataHandler {
 
-    String imgGold;
-
 
     public String getCardData(String JSONString) throws JSONException {
-        String name,cardSet,type,health,text,playerClass,attack,cost;
+        String name,cardSet,type,health,text,imgGold,playerClass,attack,cost;
 
         JSONArray cardData = new JSONArray(JSONString);
 
