@@ -4,13 +4,12 @@ package edu.quinnipiac.ser210.hearthsearchapp;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.util.JsonReader;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.InputStream;
 
@@ -22,19 +21,31 @@ public class JSONDataHandler {
 
         JSONArray cardData = new JSONArray(JSONString);
 
-        for (int i = 0; i < cardData.length(); i++) {
-            cardData.getJSONObject(i);
+        StringBuilder dataString = new StringBuilder();
 
+        try {
+            for (int i = 0; i < cardData.length(); i++) {
+                cardData.getJSONObject(i);
+                name = cardData.getJSONObject(i).getString("name");
+                cardSet = cardData.getJSONObject(i).getString("cardSet");
+                type = cardData.getJSONObject(i).getString("type");
+                health = cardData.getJSONObject(i).getString("health");
+                attack = cardData.getJSONObject(i).getString("attack");
+                cost = cardData.getJSONObject(i).getString("cost");
+
+                dataString.append("Card Name: " + name + "\n");
+                dataString.append("Card Set: " + cardSet+"\n");
+                dataString.append("Type: " + type+"\n");
+                dataString.append("Health: " + health+"\n");
+                dataString.append("Attack: " + attack +"\n");
+                dataString.append("Cost: " + cost +"\n");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
-        String toset =
-                "Card Name: " + cardData.getJSONObject(0).getString("name") +
-                        "Card Name: " + cardData.getJSONObject(1).getString("name");
-
-        return toset;
-
+    return dataString.toString();
     }
-
 
     public static class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {
         ImageView imageView;
