@@ -54,6 +54,7 @@
                 android:orientation="vertical" >
             <Button
                 android:id="@+id/slotOne"
+                android:visibility="gone"
                 android:onClick="cardClick"
                 android:layout_marginTop="10dp"
                 android:layout_width="350dp"
@@ -63,6 +64,7 @@
 
             <Button
                 android:id="@+id/slotTwo"
+                android:visibility="gone"
                 android:onClick="cardClick"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
@@ -71,6 +73,7 @@
 
             <Button
                 android:id="@+id/slotThree"
+                android:visibility="gone"
                 android:onClick="cardClick"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
@@ -78,6 +81,7 @@
                 android:text="@string/open_slot" />
             <Button
                 android:id="@+id/slotFour"
+                android:visibility="gone"
                 android:onClick="cardClick"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
@@ -85,6 +89,7 @@
                 android:text="@string/open_slot" />
             <Button
                 android:id="@+id/slotFive"
+                android:visibility="gone"
                 android:onClick="cardClick"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
@@ -92,6 +97,7 @@
                 android:text="@string/open_slot" />
             <Button
                 android:id="@+id/slotSix"
+                android:visibility="gone"
                 android:onClick="cardClick"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
@@ -99,6 +105,7 @@
                 android:text="@string/open_slot" />
             <Button
                 android:id="@+id/slotSeven"
+                android:visibility="gone"
                 android:onClick="cardClick"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
@@ -106,6 +113,7 @@
                 android:text="@string/open_slot" />
             <Button
                 android:id="@+id/slotEight"
+                android:visibility="gone"
                 android:onClick="cardClick"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
@@ -113,6 +121,7 @@
                 android:text="@string/open_slot" />
             <Button
                 android:id="@+id/slotNine"
+                android:visibility="gone"
                 android:onClick="cardClick"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
@@ -120,6 +129,7 @@
                 android:text="@string/open_slot" />
             <Button
                 android:id="@+id/slotTen"
+                android:visibility="gone"
                 android:onClick="cardClick"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
@@ -127,6 +137,7 @@
                 android:text="@string/open_slot" />
             <Button
                 android:id="@+id/slotEleven"
+                android:visibility="gone"
                 android:onClick="cardClick"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
@@ -134,6 +145,7 @@
                 android:text="@string/open_slot" />
             <Button
                 android:id="@+id/slotTwelve"
+                android:visibility="gone"
                 android:onClick="cardClick"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"

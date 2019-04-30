@@ -227,6 +227,11 @@ public class FavoritesActivity extends AppCompatActivity {
                     if (document.exists()) {
                         Log.d("FB", "DocumentSnapshot data: " + document.getData());
                         num.setText(document.getData().get("card").toString());
+                        if (document.getData().get("isOccupied").equals(true)) {
+                            num.setVisibility(View.VISIBLE);
+                        } else {
+                            num.setVisibility(View.GONE);
+                        }
                     } else {
                         Log.d("FB", "No such document");
                     }
