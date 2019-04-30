@@ -53,8 +53,8 @@ public class ResultActivity extends AppCompatActivity {
         url = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/" + name;
         new NetworkCall().execute(url);
 
-        new DownloadImageFromInternet((ImageView) findViewById(R.id.cardImage))
-                .execute(handler.getCardData("imgGold"));
+        //new JSONDataHandler.DownloadImageFromInternet((ImageView) findViewById(R.id.cardImage))
+          //      .execute();
     }
 
     @Override
@@ -62,31 +62,6 @@ public class ResultActivity extends AppCompatActivity {
     {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
-    }
-
-    public class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {
-        ImageView imageView;
-
-        public DownloadImageFromInternet(ImageView imageView) {
-            this.imageView = imageView;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String imageURL = urls[0];
-            Bitmap bimage = null;
-            try {
-                InputStream in = new java.net.URL(imageURL).openStream();
-                bimage = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error Message", e.getMessage());
-                e.printStackTrace();
-            }
-            return bimage;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            imageView.setImageBitmap(result);
-        }
     }
 
     public class NetworkCall extends AsyncTask<String, Void, String> {
