@@ -1,25 +1,22 @@
+/*
+    Authors: Jillian Biasotti, Joe Ruiz, Aden Mariyappa
+    Date: April 25 2019
+    HearthSearch Application
+ */
 package edu.quinnipiac.ser210.hearthsearchapp;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.JsonReader;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,7 +29,9 @@ public class ResultActivity extends AppCompatActivity {
 
     TextView displayInfo;
     String url;
-    String name;
+    String result;
+    String resultFromList;
+    String urlSpec;
     JSONDataHandler handler;
 
     @Override
@@ -46,23 +45,61 @@ public class ResultActivity extends AppCompatActivity {
         displayInfo = findViewById(R.id.displayInfo);
 
         Intent intent = getIntent();
-        name = intent.getStringExtra("name");
+        result = intent.getStringExtra("displayText");
+        resultFromList = intent.getStringExtra("selection");
+        //removes spaces from string
+        displayInfo.setText("you chose " + result);
+        displayInfo.setText(result);
+        while(resultFromList != null)
+        {
+            url = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/" + resultFromList;
+            new NetworkCall().execute(url);
+            Log.d("URL", url);
+        }
 
-        displayInfo.setText("you chose " + name);
 
-        url = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/" + name;
-        new NetworkCall().execute(url);
 
-        //new JSONDataHandler.DownloadImageFromInternet((ImageView) findViewById(R.id.cardImage))
-          //      .execute();
+        //new DownloadImageFromInternet((ImageView) findViewById(R.id.cardImage))
+         //       .execute(handler.imgGold);
     }
 
+    //inflates the action bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.action_deck).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
+
+    //adds functions for the action bar
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId()) {
+            case R.id.action_help:
+                Intent intent = new Intent(this, AboutActivity.class);
+                return true;
+
+            case R.id.action_favorite:
+                Intent intentfavorite = new Intent(this, FavoritesActivity.class);
+                String displayText = displayInfo.getText().toString();
+                displayText = displayText.split("\n")[0];
+                String isolatedName = displayText.replace("Card Name: ","");
+                Toast.makeText(this, "You favorited " + isolatedName + "!", Toast.LENGTH_LONG).show();
+                intentfavorite.putExtra("name", isolatedName);
+                startActivity(intentfavorite);
+                return true;
+
+            case R.id.action_deck:
+                Toast.makeText(this, "Added card to deck!", Toast.LENGTH_LONG).show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     public class NetworkCall extends AsyncTask<String, Void, String> {
 

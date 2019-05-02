@@ -6,25 +6,20 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-public class JSONDataHandler {
+public class JSONDataListHandler {
 
     public ArrayList<String> resultNames;
-
     public String getCardData(String JSONString) throws JSONException {
         String name, cardSet, type, health, text, imgGold, playerClass, attack, cost;
 
         JSONArray cardData = new JSONArray(JSONString);
-
         resultNames = new ArrayList<String>();
 
         StringBuilder dataString = new StringBuilder();
@@ -33,19 +28,10 @@ public class JSONDataHandler {
             for (int i = 0; i < cardData.length(); i++) {
                 cardData.getJSONObject(i);
                 name = cardData.getJSONObject(i).getString("name");
-                cardSet = cardData.getJSONObject(i).getString("cardSet");
-                //type = cardData.getJSONObject(i).getString("type");
-               // health = cardData.getJSONObject(i).getString("health");
-                //attack = cardData.getJSONObject(i).getString("attack");
-                //cost = cardData.getJSONObject(i).getString("cost");
 
                 resultNames.add(name);
                 dataString.append("Card Name: " + name + "\n");
-                dataString.append("Card Set: " + cardSet+"\n");
-                //dataString.append("Type: " + type+"\n");
-                //dataString.append("Health: " + health+"\n");
-                //dataString.append("Attack: " + attack +"\n");
-                //dataString.append("Cost: " + cost +"\n");
+                Log.d("List", String.valueOf(resultNames));
             }
         } catch (JSONException e) {
             e.printStackTrace();

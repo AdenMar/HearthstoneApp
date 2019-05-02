@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "648409882379",
+    "firebase_url": "https://hearthsearchapp.firebaseio.com",
+    "project_id": "hearthsearchapp",
+    "storage_bucket": "hearthsearchapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:648409882379:android:0b8ec3741301f4a4",
+        "android_client_info": {
+          "package_name": "edu.quinnipiac.ser210.hearthsearchapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "648409882379-jor5qf2h255631fgpaogkkglj8a7t39e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1_vsFqKhXGm9_IHmFclsPR9Hk-nGhIE4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "648409882379-jor5qf2h255631fgpaogkkglj8a7t39e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
