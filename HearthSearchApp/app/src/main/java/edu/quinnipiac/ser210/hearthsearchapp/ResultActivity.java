@@ -68,7 +68,6 @@ public class ResultActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        menu.findItem(R.id.action_deck).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -82,17 +81,27 @@ public class ResultActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_favorite:
-                Intent intentfavorite = new Intent(this, FavoritesActivity.class);
+                Intent intentfavorite = new Intent(this, DeckActivity.class);
                 String displayText = displayInfo.getText().toString();
                 displayText = displayText.split("\n")[0];
                 String isolatedName = displayText.replace("Card Name: ","");
-                Toast.makeText(this, "You favorited " + isolatedName + "!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "You added " + isolatedName + " to your favorites!", Toast.LENGTH_LONG).show();
                 intentfavorite.putExtra("name", isolatedName);
+                String deckName = "favorites";
+                intentfavorite.putExtra("deck", deckName);
                 startActivity(intentfavorite);
                 return true;
 
             case R.id.action_deck:
-                Toast.makeText(this, "Added card to deck!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Adding card to deck!", Toast.LENGTH_LONG).show();
+                Intent intentdeck = new Intent(this, SelectDeckActivity.class);
+                String displayTextDeck = displayInfo.getText().toString();
+                displayText = displayTextDeck.split("\n")[0];
+                String isolatedNameDeck = displayText.replace("Card Name: ","");
+                Toast.makeText(this, "You added " + isolatedNameDeck + " to your favorites!", Toast.LENGTH_LONG).show();
+                intentdeck.putExtra("name", isolatedNameDeck);
+                startActivity(intentdeck);
+
                 return true;
 
             default:

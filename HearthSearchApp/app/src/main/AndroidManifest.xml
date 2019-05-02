@@ -12,26 +12,30 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".SelectDeckActivity"></activity>
+        <activity
+            android:name=".PickDeckActivity"
+            android:label="@string/title_activity_pick_deck"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ResultListActivity"
-            android:label = "Result List"></activity>
+            android:label="Result List" />
         <activity
-            android:name=".FavoritesActivity"
-            android:label="Favorites"></activity>
+            android:name=".DeckActivity"
+            android:label="Favorites" />
         <activity
             android:name=".AboutActivity"
-            android:label="About"></activity>
+            android:label="About" />
         <activity
             android:name=".HomeActivity"
-            android:label="HearthSearch Home"></activity>
+            android:label="HearthSearch Home" />
         <activity
             android:name=".SearchActivity"
-            android:label="Search"></activity>
+            android:label="Search" />
         <activity
             android:name=".ResultActivity"
-            android:label="Result"></activity>
-        <activity
-            android:name=".MainActivity">
+            android:label="Result" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

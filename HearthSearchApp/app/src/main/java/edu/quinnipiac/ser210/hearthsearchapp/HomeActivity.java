@@ -68,7 +68,14 @@ public class HomeActivity extends AppCompatActivity {
 
     //functions for favorites button
     public void onFavoritesClick(View view) {
-        Intent intent = new Intent(this, FavoritesActivity.class);
+        Intent intent = new Intent(this, DeckActivity.class);
+        String deckName = "favorites";
+        intent.putExtra("deck", deckName);
+        startActivity(intent);
+    }
+
+    public void onDeckClick(View view) {
+        Intent intent = new Intent(this, PickDeckActivity.class);
         startActivity(intent);
     }
 }

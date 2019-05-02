@@ -10,6 +10,7 @@
     <string name="open_slot">*****</string>
     <string name="search">Search</string>
     <string name="remove">Remove</string>
-    <string name="switchguide">Switch on - Search Mode / Switch off - Removal Mode</string>
+    <string name="switchguide">Switch On - Removal Mode / Switch Off - Select Mode</string>
+    <string name="title_activity_pick_deck">PickDeck</string>
 
 </resources>

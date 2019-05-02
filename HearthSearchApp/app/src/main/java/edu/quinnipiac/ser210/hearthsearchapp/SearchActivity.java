@@ -69,6 +69,7 @@ public class SearchActivity extends AppCompatActivity {
     {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         menu.findItem(R.id.action_favorite).setVisible(false);
+        menu.findItem(R.id.action_deck).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 

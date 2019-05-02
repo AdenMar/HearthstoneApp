@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SelectDeckActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/activity_toolbar" />
+
+        <TextView
+            android:id="@+id/favoritesView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="Add card to:"
+            android:textSize="30sp" />
+
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+                <Button
+                    android:id="@+id/slotOne"
+                    android:visibility="gone"
+                    android:onClick="cardClick"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/open_slot" />
+
+                <Button
+                    android:id="@+id/slotTwo"
+                    android:visibility="gone"
+                    android:onClick="cardClick"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/open_slot" />
+
+                <Button
+                    android:id="@+id/slotThree"
+                    android:visibility="gone"
+                    android:onClick="cardClick"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/open_slot" />
+                <Button
+                    android:id="@+id/slotFour"
+                    android:visibility="gone"
+                    android:onClick="cardClick"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/open_slot" />
+                <Button
+                    android:id="@+id/slotFive"
+                    android:visibility="gone"
+                    android:onClick="cardClick"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/open_slot" />
+                <Button
+                    android:id="@+id/slotSix"
+                    android:visibility="gone"
+                    android:onClick="cardClick"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/open_slot" />
+                <Button
+                    android:id="@+id/slotSeven"
+                    android:visibility="gone"
+                    android:onClick="cardClick"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/open_slot" />
+                <Button
+                    android:id="@+id/slotEight"
+                    android:visibility="gone"
+                    android:onClick="cardClick"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/open_slot" />
+                <Button
+                    android:id="@+id/slotNine"
+                    android:visibility="gone"
+                    android:onClick="cardClick"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/open_slot" />
+                <Button
+                    android:id="@+id/slotTen"
+                    android:visibility="gone"
+                    android:onClick="cardClick"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/open_slot" />
+                <Button
+                    android:id="@+id/slotEleven"
+                    android:visibility="gone"
+                    android:onClick="cardClick"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/open_slot" />
+                <Button
+                    android:id="@+id/slotTwelve"
+                    android:visibility="gone"
+                    android:onClick="cardClick"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/open_slot" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
