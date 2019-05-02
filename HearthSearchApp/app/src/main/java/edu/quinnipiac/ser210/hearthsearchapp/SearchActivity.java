@@ -186,6 +186,7 @@ public class SearchActivity extends AppCompatActivity {
                     String displayString = dataHandler.getCardData(result);
                     ArrayList<String> displayStringList = dataHandler.resultNames;
                     Log.d("String List", String.valueOf(displayStringList));
+                    intent.putExtra("displayText", displayString);
                     listIntent.putStringArrayListExtra("displayListText",displayStringList);
 
                    // displayInfo.setText(displayString);
