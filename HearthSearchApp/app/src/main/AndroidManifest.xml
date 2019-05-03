@@ -18,7 +18,7 @@
             android:label="@string/title_activity_pick_deck"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ResultListActivity"
+            android:name=".ListActivity"
             android:label="Result List" />
         <activity
             android:name=".DeckActivity"
@@ -29,6 +29,8 @@
         <activity
             android:name=".HomeActivity"
             android:label="HearthSearch Home" />
+        <activity android:name=".ResultFromListActivity"
+            android:label="Result"/>
         <activity
             android:name=".SearchActivity"
             android:label="Search" />

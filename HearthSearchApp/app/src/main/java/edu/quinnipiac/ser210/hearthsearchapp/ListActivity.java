@@ -14,7 +14,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ResultListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class ListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ListView resultListView;
     private ArrayAdapter<String> listAdapter;
@@ -49,8 +49,9 @@ public class ResultListActivity extends AppCompatActivity implements AdapterView
         // Then you start a new Activity via Intent
         String selected =(resultListView.getItemAtPosition(position).toString());
         selected.replaceAll(" ","");
-        Intent intent = new Intent(this, ResultActivity.class);
+        Intent intent = new Intent(this, ResultFromListActivity.class);
         intent.putExtra("selection", selected);
+        Log.i("String of selected", selected);
         startActivity(intent);
     }
 

@@ -7,16 +7,13 @@ package edu.quinnipiac.ser210.hearthsearchapp;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -27,50 +24,52 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
-public class SearchActivity extends AppCompatActivity {
+public class ResultFromListActivity extends AppCompatActivity {
 
-    RadioButton nameButton;
-    RadioButton typeButton;
-    RadioButton classButton;
-    RadioButton factionButton;
-    Intent intent;
-    Intent listIntent;
+    TextView displayInfo;
     String url;
+    String result;
+    String urlSpec;
+    JSONDataHandler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_result);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        displayInfo = findViewById(R.id.displayInfo);
 
-        RadioGroup radioGroup = findViewById(R.id.radioGroup);
-        nameButton = findViewById(R.id.nameButton);
-        typeButton = findViewById(R.id.typeButton);
-        classButton = findViewById(R.id.classButton);
-        factionButton = findViewById(R.id.factionButton);
+        Intent intent = getIntent();
+        result = intent.getStringExtra("selection");
+        //removes spaces from string
+        displayInfo.setText("you chose " + result);
+        displayInfo.setText(result);
+        while(result != null)
+        {
+            url = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/" + result;
+            new NetworkCall().execute(url);
+            Log.d("URL", url);
+        }
 
 
-        intent = new Intent(this, ResultActivity.class);
-        listIntent = new Intent(this, ListActivity.class);
 
+        //new DownloadImageFromInternet((ImageView) findViewById(R.id.cardImage))
+         //       .execute(handler.imgGold);
     }
-	
+
     //inflates the action bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        menu.findItem(R.id.action_favorite).setVisible(false);
-        menu.findItem(R.id.action_deck).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 
-    //adds functions to the action bar
+    //adds functions for the action bar
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
@@ -80,11 +79,27 @@ public class SearchActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_favorite:
-                Toast.makeText(this, "You favorited this card!", Toast.LENGTH_LONG).show();
+                Intent intentfavorite = new Intent(this, DeckActivity.class);
+                String displayText = displayInfo.getText().toString();
+                displayText = displayText.split("\n")[0];
+                String isolatedName = displayText.replace("Card Name: ","");
+                Toast.makeText(this, "You added " + isolatedName + " to your favorites!", Toast.LENGTH_LONG).show();
+                intentfavorite.putExtra("name", isolatedName);
+                String deckName = "favorites";
+                intentfavorite.putExtra("deck", deckName);
+                startActivity(intentfavorite);
                 return true;
 
             case R.id.action_deck:
-                Toast.makeText(this, "Added card to deck!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Adding card to deck!", Toast.LENGTH_LONG).show();
+                Intent intentdeck = new Intent(this, SelectDeckActivity.class);
+                String displayTextDeck = displayInfo.getText().toString();
+                displayText = displayTextDeck.split("\n")[0];
+                String isolatedNameDeck = displayText.replace("Card Name: ","");
+                Toast.makeText(this, "You added " + isolatedNameDeck + " to your favorites!", Toast.LENGTH_LONG).show();
+                intentdeck.putExtra("name", isolatedNameDeck);
+                startActivity(intentdeck);
+
                 return true;
 
             default:
@@ -92,44 +107,9 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    //functions for the search button
-    public void onSearchButtonClick(View view) {
-        String urlSpec = "";
-        EditText messageView = (EditText)findViewById(R.id.searchEditText);
-        String name = messageView.getText().toString();
-
-       if(nameButton.isChecked())
-        {
-            //default
-            urlSpec = "";
-            url = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/" + urlSpec + name;
-            startActivity(intent);
-        }
-        else if(typeButton.isChecked())
-        {
-           urlSpec = "types/";
-            url = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/" + urlSpec + name;
-            startActivity(listIntent);
-        }
-        else if(classButton.isChecked())
-        {
-            urlSpec = "classes/";
-            url = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/" + urlSpec + name;
-            startActivity(listIntent);
-
-        }
-        else if(factionButton.isChecked())
-        {
-            urlSpec = "factions/";
-            url = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/" + urlSpec + name;
-            startActivity(listIntent);
-        }
-        new NetworkCall().execute(url);
-
-
-    }
 
     public class NetworkCall extends AsyncTask<String, Void, String> {
+
         @Override
         protected String doInBackground(String... strings) {
 
@@ -176,14 +156,8 @@ public class SearchActivity extends AppCompatActivity {
         protected void onPostExecute(String result){
             if (result != null){
                 try {
-                    JSONDataHandler dataHandler = new JSONDataHandler();
-                    String displayString = dataHandler.getCardData(result);
-                    ArrayList<String> displayStringList = dataHandler.resultNames;
-                    Log.d("String List", String.valueOf(displayStringList));
-                    intent.putExtra("displayText", displayString);
-                    listIntent.putStringArrayListExtra("displayListText",displayStringList);
-
-                   // displayInfo.setText(displayString);
+                    String displayString = new JSONDataHandler().getCardData(result);
+                    displayInfo.setText(displayString);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -204,4 +178,6 @@ public class SearchActivity extends AppCompatActivity {
             return buffer;
         }
     }
+
+
 }
