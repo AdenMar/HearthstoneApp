@@ -94,8 +94,8 @@ public class DeckActivity extends AppCompatActivity {
         deckName.setText(deck);
 
         // updates and fills the buttons with the favorited cards
-        updateFavorite();
-        loadAllFavorites();
+        updateCards();
+        loadAllCards();
 
     }
 
@@ -206,7 +206,7 @@ public class DeckActivity extends AppCompatActivity {
 
     // cycles through each document, checking occupation status, if space is occupied, continue,
     // if not, assign card name to card and update occupation status
-    public void updateFavorite() {
+    public void updateCards() {
         if (text == null) {} else {
 
             db.collection(deckCollection)
@@ -237,11 +237,11 @@ public class DeckActivity extends AppCompatActivity {
                         "card", card,
                         "isOccupied", isOccupied
                 );
-        loadAllFavorites();
+        loadAllCards();
     }
 
     // applies proper card information based on params
-    public void loadFavorites(String fav, final Button num) {
+    public void loadCard(String fav, final Button num) {
         DocumentReference docRef = db.collection(deckCollection).document(fav);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -267,19 +267,19 @@ public class DeckActivity extends AppCompatActivity {
     }
 
     // utilizes previous function to apply all cards
-    public void loadAllFavorites() {
-        loadFavorites("slot01", slotOne);
-        loadFavorites("slot02", slotTwo);
-        loadFavorites("slot03", slotThree);
-        loadFavorites("slot04", slotFour);
-        loadFavorites("slot05", slotFive);
-        loadFavorites("slot06", slotSix);
-        loadFavorites("slot07", slotSeven);
-        loadFavorites("slot08", slotEight);
-        loadFavorites("slot09", slotNine);
-        loadFavorites("slot10", slotTen);
-        loadFavorites("slot11", slotEleven);
-        loadFavorites("slot12", slotTwelve);
+    public void loadAllCards() {
+        loadCard("slot01", slotOne);
+        loadCard("slot02", slotTwo);
+        loadCard("slot03", slotThree);
+        loadCard("slot04", slotFour);
+        loadCard("slot05", slotFive);
+        loadCard("slot06", slotSix);
+        loadCard("slot07", slotSeven);
+        loadCard("slot08", slotEight);
+        loadCard("slot09", slotNine);
+        loadCard("slot10", slotTen);
+        loadCard("slot11", slotEleven);
+        loadCard("slot12", slotTwelve);
     }
 
     public class NetworkCall extends AsyncTask<String, Void, String> {
@@ -334,7 +334,7 @@ public class DeckActivity extends AppCompatActivity {
                     ArrayList<String> displayStringList = dataHandler.resultNames;
                     Log.d("String List", String.valueOf(displayStringList));
                     resultIntent.putExtra("displayText", displayString);
-                    
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
