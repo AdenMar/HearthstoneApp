@@ -138,8 +138,8 @@ public class SelectDeckActivity extends AppCompatActivity {
             intent.putExtra("deck", slotTwelve.getText().toString());
         }
 
-
-        Toast.makeText(this, "Adding  " + text + " to a deck!", Toast.LENGTH_LONG).show();
+        String deck = intent.getStringExtra("deck");
+        Toast.makeText(this, "Added " + text + " to " + deck + "!", Toast.LENGTH_LONG).show();
         intent.putExtra("name", text);
         startActivity(intent);
 
