@@ -93,12 +93,10 @@ public class ResultActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_deck:
-                Toast.makeText(this, "Adding card to deck!", Toast.LENGTH_LONG).show();
                 Intent intentdeck = new Intent(this, SelectDeckActivity.class);
                 String displayTextDeck = displayInfo.getText().toString();
                 displayText = displayTextDeck.split("\n")[0];
                 String isolatedNameDeck = displayText.replace("Card Name: ","");
-                Toast.makeText(this, "You added " + isolatedNameDeck + " to your favorites!", Toast.LENGTH_LONG).show();
                 intentdeck.putExtra("name", isolatedNameDeck);
                 startActivity(intentdeck);
 

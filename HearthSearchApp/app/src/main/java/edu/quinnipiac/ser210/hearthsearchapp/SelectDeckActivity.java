@@ -139,6 +139,7 @@ public class SelectDeckActivity extends AppCompatActivity {
         }
 
 
+        Toast.makeText(this, "Adding  " + text + " to a deck!", Toast.LENGTH_LONG).show();
         intent.putExtra("name", text);
         startActivity(intent);
 
