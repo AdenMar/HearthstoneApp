@@ -6,6 +6,7 @@
 package edu.quinnipiac.ser210.hearthsearchapp;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,12 +20,22 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.android.gms.tasks.*;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import org.json.JSONException;
 
 public class DeckActivity extends AppCompatActivity {
 
@@ -45,6 +56,7 @@ public class DeckActivity extends AppCompatActivity {
     String text;
     String deck;
     String deckCollection;
+    Intent resultIntent;
 
     // creates an instance of our FireBase FireStore database
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -61,6 +73,8 @@ public class DeckActivity extends AppCompatActivity {
         text = intent.getStringExtra("name");
         deck = intent.getStringExtra("deck");
         deckCollection = deck;
+
+        resultIntent = new Intent(this, ResultActivity.class);
 
         slotOne = (Button) findViewById(R.id.slotOne);
         slotTwo = (Button) findViewById(R.id.slotTwo);
@@ -119,39 +133,39 @@ public class DeckActivity extends AppCompatActivity {
 
     // when a card (button) is pressed, either search it or remove it base on the switch position
     public void cardClick(View view){
+        String name = "";
 
         if (slotEdit.isChecked() == false) {
 
-            Intent intent = new Intent(this, ResultActivity.class);
             if (view.getId() == slotOne.getId()) {
-                intent.putExtra("name", slotOne.getText().toString());
+                name = slotOne.getText().toString();
             } else if (view.getId() == slotTwo.getId()) {
-                intent.putExtra("name", slotTwo.getText().toString());
+                name = slotTwo.getText().toString();
             } else if (view.getId() == slotThree.getId()) {
-                intent.putExtra("name", slotThree.getText().toString());
+                name = slotThree.getText().toString();
             } else if (view.getId() == slotFour.getId()) {
-                intent.putExtra("name", slotFour.getText().toString());
+                name = slotFour.getText().toString();
             } else if (view.getId() == slotFive.getId()) {
-                intent.putExtra("name", slotFive.getText().toString());
+                name = slotFive.getText().toString();
             } else if (view.getId() == slotSix.getId()) {
-                intent.putExtra("name", slotSix.getText().toString());
+                name = slotSix.getText().toString();
             } else if (view.getId() == slotSeven.getId()) {
-                intent.putExtra("name", slotSeven.getText().toString());
+                name = slotSeven.getText().toString();
             } else if (view.getId() == slotEight.getId()) {
-                intent.putExtra("name", slotEight.getText().toString());
+                name = slotEight.getText().toString();
             } else if (view.getId() == slotNine.getId()) {
-                intent.putExtra("name", slotNine.getText().toString());
+                name = slotNine.getText().toString();
             } else if (view.getId() == slotTen.getId()) {
-                intent.putExtra("name", slotTen.getText().toString());
+                name = slotTen.getText().toString();
             } else if (view.getId() == slotEleven.getId()) {
-                intent.putExtra("name", slotEleven.getText().toString());
+                name = slotEleven.getText().toString();
             } else if (view.getId() == slotTwelve.getId()) {
-                intent.putExtra("name", slotTwelve.getText().toString());
+                name = slotTwelve.getText().toString();
             }
 
-            String nameText = "";
-            intent.putExtra("type", nameText);
-            startActivity(intent);
+            String url = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/" + name;
+            startActivity(resultIntent);
+            new NetworkCall().execute(url);
 
         } else {
 
@@ -181,8 +195,8 @@ public class DeckActivity extends AppCompatActivity {
                 removeCard("slot12");
             }
         }
-
     }
+
 
     // sets both document fields to base on param,
     // passed through to proper function
@@ -268,6 +282,80 @@ public class DeckActivity extends AppCompatActivity {
         loadFavorites("slot12", slotTwelve);
     }
 
+    public class NetworkCall extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+
+            HttpURLConnection urlConnection = null;
+            BufferedReader reader = null;
+            String cardDataJSON = null;
+
+            try{
+                URL url = new URL(strings[0]);
+
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.setRequestProperty("X-RapidAPI-Key","8267e69849msh50454c6cb8b515dp149b89jsn935699dc0ac6");
+
+                urlConnection.connect();
+
+                InputStream in = urlConnection.getInputStream();
+                if(in == null) {
+                    return null;
+                }
+                reader = new BufferedReader(new InputStreamReader(in));
+
+                cardDataJSON = getBufferStringFromBuffer(reader).toString();
+
+            } catch (Exception e) {
+                Log.e("error","Error" + e.getMessage());
+                return null;
+            } finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+                if (reader != null){
+                    try{
+                        reader.close();
+                    } catch (IOException e){
+                        Log.e("error", "Error" + e.getMessage());
+                        return null;
+                    }
+                }
+            }
+            return cardDataJSON;
+        }
+
+        protected void onPostExecute(String result){
+            if (result != null){
+                try {
+                    JSONDataHandler dataHandler = new JSONDataHandler();
+                    String displayString = dataHandler.getCardData(result);
+                    ArrayList<String> displayStringList = dataHandler.resultNames;
+                    Log.d("String List", String.valueOf(displayStringList));
+                    resultIntent.putExtra("displayText", displayString);
+                    
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+
+        private StringBuffer getBufferStringFromBuffer(BufferedReader br) throws Exception{
+            StringBuffer buffer = new StringBuffer();
+
+            String line;
+            while((line = br.readLine()) != null){
+                buffer.append(line + '\n');
+            }
+
+            if (buffer.length() == 0)
+                return null;
+
+            return buffer;
+        }
+    }
 
 
 }

@@ -48,7 +48,6 @@ public class SearchActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        RadioGroup radioGroup = findViewById(R.id.radioGroup);
         nameButton = findViewById(R.id.nameButton);
         typeButton = findViewById(R.id.typeButton);
         classButton = findViewById(R.id.classButton);
@@ -125,8 +124,6 @@ public class SearchActivity extends AppCompatActivity {
             startActivity(listIntent);
         }
         new NetworkCall().execute(url);
-
-
     }
 
     public class NetworkCall extends AsyncTask<String, Void, String> {
@@ -190,6 +187,7 @@ public class SearchActivity extends AppCompatActivity {
             }
 
         }
+
         private StringBuffer getBufferStringFromBuffer(BufferedReader br) throws Exception{
             StringBuffer buffer = new StringBuffer();
 

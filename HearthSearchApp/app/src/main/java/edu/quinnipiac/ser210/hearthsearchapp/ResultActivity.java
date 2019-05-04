@@ -31,8 +31,6 @@ public class ResultActivity extends AppCompatActivity {
     String url;
     String result;
     String resultFromList;
-    String urlSpec;
-    JSONDataHandler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,17 +48,13 @@ public class ResultActivity extends AppCompatActivity {
         //removes spaces from string
         displayInfo.setText("you chose " + result);
         displayInfo.setText(result);
+
         while(resultFromList != null)
         {
             url = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/" + resultFromList;
             new NetworkCall().execute(url);
             Log.d("URL", url);
         }
-
-
-
-        //new DownloadImageFromInternet((ImageView) findViewById(R.id.cardImage))
-         //       .execute(handler.imgGold);
     }
 
     //inflates the action bar
@@ -83,8 +77,7 @@ public class ResultActivity extends AppCompatActivity {
             case R.id.action_favorite:
                 Intent intentfavorite = new Intent(this, DeckActivity.class);
                 String displayText = displayInfo.getText().toString();
-                displayText = displayText.split("\n")[0];
-                String isolatedName = displayText.replace("Card Name: ","");
+                String isolatedName = stripResult(displayText);
                 Toast.makeText(this, "You added " + isolatedName + " to your favorites!", Toast.LENGTH_LONG).show();
                 intentfavorite.putExtra("name", isolatedName);
                 String deckName = "favorites";
@@ -95,8 +88,7 @@ public class ResultActivity extends AppCompatActivity {
             case R.id.action_deck:
                 Intent intentdeck = new Intent(this, SelectDeckActivity.class);
                 String displayTextDeck = displayInfo.getText().toString();
-                displayText = displayTextDeck.split("\n")[0];
-                String isolatedNameDeck = displayText.replace("Card Name: ","");
+                String isolatedNameDeck = stripResult(displayTextDeck);
                 intentdeck.putExtra("name", isolatedNameDeck);
                 startActivity(intentdeck);
 
@@ -105,6 +97,12 @@ public class ResultActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public String stripResult(String cardResult){
+        cardResult = cardResult.split("\n")[0];
+        String stripResult = cardResult.replace("Card Name: ","");
+        return stripResult;
     }
 
 
